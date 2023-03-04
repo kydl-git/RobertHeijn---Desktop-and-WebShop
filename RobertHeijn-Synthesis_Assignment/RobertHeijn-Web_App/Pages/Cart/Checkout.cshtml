@@ -1,0 +1,89 @@
+﻿@page
+@model RobertHeijn_Web_App.Pages.Cart.CheckoutModel
+
+@{
+    ViewData["Title"] = "Checkout Items";
+}
+
+<section class="rhs-inventory-hero">
+    <div class="container">
+        <img class="rhs-inventory-title" src="~/images/main_banner_text.png" alt="Robert Heijn"/>
+    </div>
+</section>   
+<div class="container">
+    <h1>Review</h1>
+    @if (Model.CartViewModel.CartItems.Any())
+    {
+        <form asp-page="Checkout" method="post">
+            <article class="rhs-shopping-cart-titles row">
+                <br />
+                <section class="rhs-shopping-cart-title col-xs-3">Product</section>
+                <section class="rhs-shopping-cart-title col-xs-3 hidden-lg-down"></section>
+                <section class="rhs-shopping-cart-title col-xs-2">Price</section>
+                <section class="rhs-shopping-cart-title col-xs-2">Quantity</section>
+                <section class="rhs-shopping-cart-title col-xs-2">Cost</section>
+            </article>
+            <div class="rhs-shopping-cart-items row">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                @for (int i = 0; i < Model.CartViewModel.CartItems.Count; i++)
+                {
+                    var item = Model.CartViewModel.CartItems[i];
+                    <article class="rhs-shopping-cart-items row">
+                        <div>
+                            <section class="rhs-shopping-cart-item rhs-shopping-cart-item--middle col-lg-3 hidden-lg-down">
+                                <img class="rhs-shopping-cart-image" 
+                                src="images/catalog-item-default-45.png" alt="cart item"/>
+                            </section>
+                            <section class="rhs-shopping-cart-item rhs-shopping-cart-item--middle col-xs-3">@item.ProductName</section>
+                            <section class="rhs-shopping-cart-item rhs-shopping-cart-item--middle col-xs-2">€ @item.Price.ToString("N2")</section>
+                            <section class="rhs-shopping-cart-item rhs-shopping-cart-item--middle col-xs-2">
+                                <input type="hidden" name="@("Items[" + i + "].Id")" value="@item.ProductId" />
+                                <input type="hidden" name="@("Items[" + i + "].Quantity")" value="@item.Quantity" />
+                                @item.Quantity
+                            </section>
+                            <section class="rhs-shopping-cart-item rhs-shopping-cart-item--middle rhs-shopping-cart-item--mark col-xs-2">€ @Math.Round(item.Quantity * item.Price, 2).ToString("N2")</section>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </article>
+                }
+
+                <div class="container">
+                    <article class="rhs-shopping-cart-titles rhs-shopping-cart-titles--clean row">
+                        <section class="rhs-shopping-cart-title col-xs-10"></section>
+                        <section class="rhs-shopping-cart-title col-xs-2">Total</section>
+                    </article>
+
+                    <article class="rhs-shopping-cart-items row">
+                        <section class="rhs-shopping-cart-item col-xs-10"></section>
+                        <section class="rhs-shopping-cart-item rhs-shopping-cart-item--mark col-xs-2">$ @Model.CartViewModel.TotalPrice.ToString("N2")</section>
+                    </article>
+
+                    <article class="rhs-shopping-cart-items row">
+                        <section class="rhs-shopping-cart-item col-xs-7"></section>
+                    </article>
+                </div>
+                <div class="row">
+                    <section class="rhs-shopping-cart-item col-xs-1">
+                        <a asp-page="Index" class="btn rhs-shopping-cart-checkout text-white">[ Back ]</a>
+                    </section>
+                    <section class="rhs-shopping-cart-item col-xs-push-7 col-xs-4 text-right">
+                        <input type="submit" class="btn 
+                        rhs-shopping-cart-checkout" value="[ CHOOSE DELIVERY ]" />
+                    </section>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <h3 class="rhs-shopping-cart-items row">
+            Basket is empty.
+        </h3>
+
+        <section class="rhs-shopping-cart-item">
+            <a asp-page="/Index" class="btn rhs-shopping-cart-checkout text-white">[ Continue Shopping ]</a>
+        </section>
+    }
+</div>

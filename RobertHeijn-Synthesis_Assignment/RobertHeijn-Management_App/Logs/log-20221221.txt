@@ -1,0 +1,19 @@
+2022-12-21 01:58:05.170 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-21 01:58:08.260 +01:00 [INF] Shop worker form loaded
+2022-12-21 02:08:44.648 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-21 02:11:35.411 +01:00 [INF] Shop worker form loaded
+2022-12-21 02:11:57.303 +01:00 [INF] AddProductPopUp => Product edited: Pineapple => Price: {}; Quantity {}, Amount {}
+2022-12-21 02:12:37.583 +01:00 [INF] User has exited the application
+2022-12-21 10:34:31.998 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-21 10:34:35.258 +01:00 [INF] Shop worker form loaded
+2022-12-21 10:34:43.279 +01:00 [INF] User has exited the application
+2022-12-21 10:36:29.900 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-21 10:36:34.280 +01:00 [INF] Shop worker form loaded
+2022-12-21 10:38:27.221 +01:00 [INF] Shop worker form loaded
+2022-12-21 10:38:55.820 +01:00 [INF] User has exited the application
+2022-12-21 13:04:46.109 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-21 13:04:48.856 +01:00 [INF] Shop worker form loaded
+2022-12-21 13:06:48.746 +01:00 [INF] New product was added to the inventory, values:
+Kima, 149, 100
+2022-12-21 13:07:06.912 +01:00 [INF] AddProductPopUp => Product edited: Kima => Price: 1.49; Quantity {}, Amount {}
+2022-12-21 13:07:41.071 +01:00 [INF] User has exited the application

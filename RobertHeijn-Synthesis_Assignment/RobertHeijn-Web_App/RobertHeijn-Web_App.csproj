@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>RobertHeijn_Web_App</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NToastNotify" Version="8.0.0" />
+        <PackageReference Include="Scrutor" Version="4.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+        <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Views\Shared\_LoginPartial.cshtml" />
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\jquery-validate\jquery.validate.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\jquery-validate\jquery.validate.min.js" />
+        <_ContentIncludedByDefault Remove="Views\Order\Checkout.cshtml" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\app.component.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\app.component.min.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\app.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\cart\cart-status\cart-status.component.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\cart\cart.component.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\catalog\catalog.component.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\catalog\pager.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\normalize.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\orders\orders.component.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\shared\components\header\header.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\shared\components\identity\identity.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\shared\components\pager\pager.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\css\site.min.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="ViewModels\Cart\CartViewModel.cs" />
+    </ItemGroup>
+
+</Project>

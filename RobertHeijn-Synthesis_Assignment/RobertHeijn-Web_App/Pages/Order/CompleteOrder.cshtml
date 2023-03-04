@@ -1,0 +1,60 @@
+﻿@page
+@model RobertHeijn_Web_App.Pages.Order.CompleteOrderModel
+
+@{
+    ViewData["Title"] = "Order Final Details";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row d-md-grid">
+        <div class="col-md-12">
+            <section class="col-md-6">
+                <form method="post">
+                    <div class="form-group">
+                        <label class="form-label">Select a delivery address: </label>
+                        <select class="form-select" asp-for="SelectedAddressId">
+                            @for (var i = 0; i < Model.Addresses!.Count; i++)
+                            {
+                                <option value="@i">@Model.Addresses[i]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Select one of the time slots:</label>
+                        <select class="form-select" asp-for="TimeIndex">
+                            @for (var i = 0; i < Model.TimeSlots.Count; i++)
+                            {
+                                <option value="@i">@Model.TimeSlots[i].StartTime - @Model.TimeSlots[i].EndTime</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="container">
+                        <article class="rhs-shopping-cart-titles rhs-shopping-cart-titles--clean row">
+                            <section class="rhs-shopping-cart-title col-xs-10"></section>
+                            <section class="rhs-shopping-cart-title col-xs-2">Selected delivery type</section>
+                        </article>
+
+                        <article class="rhs-shopping-cart-items row">
+                            <section class="rhs-shopping-cart-item col-xs-10"></section>
+                            <section class="rhs-shopping-cart-item rhs-shopping-cart-item--mark col-xs-2">@Model.DeliveryOption.GetType().Name</section>
+                        </article>
+                    </div>
+                    <section class="rhs-shopping-cart-item rhs-shopping-cart-item--middle
+                       rhs-shopping-cart-item--mark col-xs-2">€ @Model.Cart.TotalPrice.ToString("N2")</section>
+                    <div class="row">
+                        <div class="form-group">
+                            <section class="rhs-shopping-cart-item col-xs-1">
+                                <label class="form-label">Order will be delivered on @Model.DeliveryDate.ToString("yyyy MMMM dd")</label>
+                            </section>
+                            <section class="rhs-shopping-cart-item col-xs-push-7 col-xs-4 text-right">
+                                <br/>
+                                <input type="submit" value="[ FINISH ORDER ]" class="btn btn-primary btn-lg"/>
+                            </section>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+2023-01-12 13:59:54.060 +01:00 [INF] Login form loaded, with a width of 2024 and a height of 1340
+2023-01-12 13:59:57.586 +01:00 [INF] Shop worker form loaded
+2023-01-12 14:00:40.898 +01:00 [INF] User has exited the application
+2023-01-12 14:00:58.765 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2023-01-12 14:01:01.265 +01:00 [INF] Shop worker form loaded
+2023-01-12 14:01:30.766 +01:00 [INF] User has exited the application

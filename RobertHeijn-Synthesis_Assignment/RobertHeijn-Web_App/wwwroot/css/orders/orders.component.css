@@ -1,0 +1,82 @@
+﻿.rhs-orders {
+    min-height: 80vh;
+    overflow-x: hidden;
+}
+
+.rhs-orders-header {
+    background-color: #00A69C;
+    height: 4rem;
+}
+
+.rhs-orders-back {
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 4rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.35s;
+}
+
+.rhs-orders-back:hover {
+    color: #FFFFFF;
+    transition: color 0.35s;
+}
+
+.rhs-orders-titles {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+
+.rhs-orders-title {
+    text-transform: uppercase;
+}
+
+.rhs-orders-items {
+    height: 2rem;
+    line-height: 2rem;
+    position: relative;
+}
+
+.rhs-orders-items:nth-of-type(2n + 1):before {
+    background-color: #EEEEFF;
+    content: '';
+    height: 100%;
+    left: 0;
+    margin-left: -100vw;
+    position: absolute;
+    top: 0;
+    width: 200vw;
+    z-index: -1;
+}
+
+.rhs-orders-item {
+    font-weight: 300;
+}
+
+.rhs-orders-item--hover {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rhs-orders-items:hover .rhs-orders-item--hover {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.rhs-orders-link {
+    color: #83D01B;
+    text-decoration: none;
+    transition: color 0.35s;
+}
+
+.rhs-orders-link:hover {
+    color: #75b918;
+    transition: color 0.35s;
+}
+
+.rhs-orders-detail-section {
+    padding-bottom: 30px;
+}
+
+.rhs-orders-detail-title {
+    font-size: 25px;
+}

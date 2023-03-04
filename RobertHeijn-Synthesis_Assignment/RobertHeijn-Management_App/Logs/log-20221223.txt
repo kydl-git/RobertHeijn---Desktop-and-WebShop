@@ -1,0 +1,22 @@
+2022-12-23 06:03:42.591 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 06:03:47.113 +01:00 [INF] User has exited the application
+2022-12-23 16:37:44.167 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 16:37:52.236 +01:00 [INF] Shop worker form loaded
+2022-12-23 16:39:17.183 +01:00 [INF] User has exited the application
+2022-12-23 16:56:17.289 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 16:56:19.853 +01:00 [INF] Shop worker form loaded
+2022-12-23 17:02:02.695 +01:00 [INF] New product was added to the inventory, values:
+asdada, 0.25, 1
+2022-12-23 17:02:11.155 +01:00 [INF] User has exited the application
+2022-12-23 17:04:55.079 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 17:04:57.850 +01:00 [INF] Shop worker form loaded
+2022-12-23 17:06:21.005 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 17:06:23.589 +01:00 [INF] Shop worker form loaded
+2022-12-23 17:08:15.974 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 17:08:18.675 +01:00 [INF] Shop worker form loaded
+2022-12-23 17:08:33.308 +01:00 [INF] User has exited the application
+2022-12-23 17:09:47.722 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 17:09:50.401 +01:00 [INF] Shop worker form loaded
+2022-12-23 17:10:19.124 +01:00 [INF] User has exited the application
+2022-12-23 17:15:28.187 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-23 17:15:30.945 +01:00 [INF] Shop worker form loaded

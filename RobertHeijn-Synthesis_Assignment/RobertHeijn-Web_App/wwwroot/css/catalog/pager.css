@@ -1,0 +1,38 @@
+.rhs-pager-wrapper {
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.rhs-pager-item-left {
+    float: left;
+}
+
+.rhs-pager-item-right {
+    float: right;
+}
+
+.rhs-pager-item--navigable {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.rhs-pager-item--navigable.is-disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rhs-pager-item--navigable:hover {
+    color: #83D01B;
+}
+
+@media screen and (max-width: 1280px) {
+    .rhs-pager-item {
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .rhs-pager-item {
+        margin: 0 4vw;
+    }
+}

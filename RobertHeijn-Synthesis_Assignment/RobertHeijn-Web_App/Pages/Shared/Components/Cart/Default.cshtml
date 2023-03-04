@@ -1,0 +1,14 @@
+﻿@model RobertHeijn_Web_App.Models.Cart.CartItemsCountModel
+
+@{
+    ViewData["Title"] = "My Shopping Cart";
+}                                          
+<a class="rhs-shopping-cart-status "
+   asp-page="/Cart/Index">
+    <div class="rhs-shopping-cart-status-image">
+        <img src="~/images/cart.png" alt="Shopping Cart"/>
+    </div>
+    <div class="rhs-shopping-cart-status-badge">
+        @Model.CartItemsCount
+    </div>
+</a>

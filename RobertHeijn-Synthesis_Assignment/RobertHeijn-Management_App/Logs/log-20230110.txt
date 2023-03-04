@@ -1,0 +1,10 @@
+2023-01-10 13:35:41.196 +01:00 [INF] Login form loaded, with a width of 2024 and a height of 1340
+2023-01-10 13:35:56.565 +01:00 [INF] Shop worker form loaded
+2023-01-10 13:36:32.156 +01:00 [INF] User has exited the application
+2023-01-10 13:46:18.234 +01:00 [INF] Login form loaded, with a width of 2024 and a height of 1340
+2023-01-10 13:47:17.119 +01:00 [INF] Login form loaded, with a width of 2024 and a height of 1340
+2023-01-10 13:51:15.735 +01:00 [INF] Login form loaded, with a width of 2024 and a height of 1340
+2023-01-10 14:17:28.124 +01:00 [INF] Shop worker form loaded
+2023-01-10 14:20:03.470 +01:00 [INF] New product was added to the inventory, values:
+product1, 0.75, 2
+2023-01-10 15:26:56.201 +01:00 [INF] User has exited the application

@@ -1,0 +1,14 @@
+﻿@using BusinessLogic.BL_DaL_Interfaces
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject ICredentialsActionable CredentialsService 
+@inject IPersonActionable PersonService
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="d-flex mx-4 @NavBarPages.EditAccountNavClass(ViewContext)">
+        <a asp-action="EditAccount" class="btn btn-primary d-flex">Edit 
+        details</a>
+    </li>
+    <li class="d-flex mx-4 @NavBarPages.ChangePasswordNavClass(ViewContext)">
+        <a asp-action="ChangePassword" class="btn btn-secondary d-flex">Change Password</a>
+    </li>
+</ul>

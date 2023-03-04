@@ -1,0 +1,54 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RobertHeijn_Web_App.Areas.Identity.Pages.Account.LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+
+<div class="container account-login-container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row d-md-grid">
+        <div class="col-md-12">
+            <section class="col-md-6">
+                <form method="post">
+                    <hr/>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input type="email" asp-for="Input.Email" 
+                        class="form-control"/>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>  
+                    <br/>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input type="password" asp-for="Input.Password" 
+                        class="form-control"/>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>   
+                    <br/>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input type="checkbox" asp-for="Input.RememberMe"/>
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary d-flex align-self-center">Log in</button>
+                    </div>   
+                    <br/>
+                    <div class="form-group">
+                        <p>
+                            <a class="btn btn-secondary d-flex align-self-end" asp-page="./Register" 
+                            asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div> 

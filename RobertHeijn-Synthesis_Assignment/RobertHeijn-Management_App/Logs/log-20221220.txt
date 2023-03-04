@@ -1,0 +1,19 @@
+2022-12-20 12:47:58.074 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-20 12:50:24.936 +01:00 [INF] Shop worker form loaded
+2022-12-20 13:10:49.377 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-20 13:11:26.202 +01:00 [INF] Shop worker form loaded
+2022-12-20 13:13:41.181 +01:00 [FTL] StockManagementUc => 
+Column 'id' does not belong to table Table.
+2022-12-20 13:20:24.053 +01:00 [FTL] StockManagementUc => 
+Column 'id' does not belong to table Table.
+2022-12-20 13:21:24.118 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-20 13:21:34.108 +01:00 [INF] Shop worker form loaded
+2022-12-20 13:24:11.846 +01:00 [INF] User has exited the application
+2022-12-20 15:28:23.398 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-20 15:28:47.947 +01:00 [INF] Shop worker form loaded
+2022-12-20 15:32:02.806 +01:00 [FTL] StockManagementUc => 
+	Database connection unavailable!
+Check your internet connection or connect to VPN!
+2022-12-20 15:32:22.883 +01:00 [INF] Login form loaded, with a width of 1516 and a height of 897
+2022-12-20 15:32:25.636 +01:00 [INF] Shop worker form loaded
+2022-12-20 15:32:51.440 +01:00 [INF] User has exited the application

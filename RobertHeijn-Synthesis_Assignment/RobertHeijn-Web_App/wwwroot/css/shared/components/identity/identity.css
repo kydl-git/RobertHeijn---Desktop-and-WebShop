@@ -1,0 +1,57 @@
+﻿.rhs-identity {
+    line-height: 3rem;
+    position: relative;
+    text-align: right;
+}
+
+.rhs-identity-section {
+    display: inline-block;
+    width: 100%;
+}
+
+.rhs-identity-name {
+    display: inline-block;
+}
+
+.rhs-identity-name--upper {
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+    .rhs-identity-name {
+        font-size: 0.85rem;
+    }
+}
+
+.rhs-identity-image {
+    display: inline-block;
+}
+
+.rhs-identity-drop {
+    height: 10px;
+    width: 14rem;
+    overflow: hidden;
+    padding: .5rem;
+    position: absolute;
+    right: 0;
+    top: 2.5rem;
+    transition: height 0.35s;
+}
+
+.rhs-identity:hover .rhs-identity-drop {
+    border: 1px solid #EEEEEE;
+    height: 14rem;
+    transition: height 0.35s;
+    z-index: 10;
+}
+
+.rhs-identity-item {
+    cursor: pointer;
+    transition: color 0.35s;
+}
+
+.rhs-identity-item:hover {
+    color: #75b918;
+    transition: color 0.35s;
+}
+

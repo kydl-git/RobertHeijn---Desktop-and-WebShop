@@ -1,0 +1,30 @@
+﻿
+@model RobertHeijn_Web_App.Models.Inventory.InventoryViewModel
+@{
+    ViewData["Title"] = "Inventory";
+} 
+<section class="rhs-inventory-hero"> 
+        <img class="rhs-catalog-title" src="~/images/main_banner_text.png" alt="Robert Heijn"/>
+</section>
+<div class="container my-container">
+    @if (Model.InventoryItems.Any())
+    {
+        <div class="rhs-shopping-cart-items row">   
+              
+            <form method="post">
+            @foreach (var item in Model.InventoryItems)
+            {
+                <div class="rhs-inventory-item col-md-3 bg-cyan-200 mx-auto mt-1">
+                    <partial name="_inventoryProduct" for="@item" />
+                </div>
+            }  
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="rhs-shopping-cart-items row">
+            CURRENTLY THERE ARE NO ITEMS IN THE INVENTORY
+        </div>
+    }
+</div>

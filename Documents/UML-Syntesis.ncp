@@ -1,0 +1,1057 @@
+<Project>
+  <Name>RobertHeijn-UML</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>BLL-Entities And Related Interfaces</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Category</Name>
+        <Access>Public</Access>
+        <Location left="2302" top="405" />
+        <Size width="486" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Id { get; }</Member>
+        <Member type="Property">public string Name { get; }</Member>
+        <Member type="Property">public Category? ParentCategory { get; private set; }</Member>
+        <Member type="Property">public List&lt;Category&gt;? SubCategories { get; }</Member>
+        <Member type="Constructor">public Category(string name, Category? parentCategory = null)</Member>
+        <Member type="Constructor">public Category()</Member>
+        <Member type="Method">public bool SetParentCategory(Category parentCategory)</Member>
+        <Member type="Method">public bool AddSubCategory(Category subCategory)</Member>
+        <Member type="Method">public bool CreateCategory(ICategoryActionable categoryService, bool isSubCategory = false)</Member>
+        <Member type="Method">public bool UpdateCategoryName(ICategoryActionable categoryService)</Member>
+        <Member type="Method">public bool DeleteCategory(ICategoryActionable categoryService)</Member>
+        <Member type="Method">public Category GetCategory(ICategoryActionable categoryService)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Credentials</Name>
+        <Access>Public</Access>
+        <Location left="52" top="137" />
+        <Size width="633" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly ScryptEncoder _scryptEncoder = new()</Member>
+        <Member type="Property">public string Email { get; }</Member>
+        <Member type="Property">public string Password { get; }</Member>
+        <Member type="Constructor">public Credentials()</Member>
+        <Member type="Constructor">public Credentials(string email, string password, bool isNew = false)</Member>
+        <Member type="Method">public bool Login(Credentials credentials)</Member>
+        <Member type="Method">public bool Create(ICredentialsActionable credentialsService)</Member>
+        <Member type="Method">public bool UpdatePassword(ICredentialsActionable credentialsService, string oldPassword, string newPassword)</Member>
+        <Member type="Method">public Credentials? Login(ICredentialsActionable credentialsService)</Member>
+        <Member type="Method">private bool ComparePassword(string writtenPassword)</Member>
+        <Member type="Method">private string Encrypt(string password)</Member>
+        <Member type="Method">public Credentials ReadCredentialsByEmail(ICredentialsActionable credentialsService, string email)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Person</Name>
+        <Access>Public</Access>
+        <Location left="52" top="483" />
+        <Size width="620" height="298" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Id { get; }</Member>
+        <Member type="Property">public Credentials Credentials { get; }</Member>
+        <Member type="Property">public string? FirstName { get; }</Member>
+        <Member type="Property">public string? LastName { get; }</Member>
+        <Member type="Property">public string? Phone { get; }</Member>
+        <Member type="Constructor">public Person(Credentials credentials, string? firstName, string? lastName, string? phone, int? id = null, IRole? role = null)</Member>
+        <Member type="Constructor">public Person(Credentials credentials)</Member>
+        <Member type="Constructor">public Person()</Member>
+        <Member type="Method">public void SetRole(IRole role)</Member>
+        <Member type="Method">public bool CreatePerson(IPersonActionable personService)</Member>
+        <Member type="Method">public Person GetPerson(IPersonActionable personService)</Member>
+        <Member type="Method">public bool UpdatePerson(IPersonActionable personService)</Member>
+        <Member type="Method">public bool DeletePerson(IPersonActionable personService)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IRole</Name>
+        <Access>Public</Access>
+        <Location left="52" top="878" />
+        <Size width="469" height="129" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">int RoleId { get; }</Member>
+        <Member type="Property">Address? ShopAddress { get; }</Member>
+        <Member type="Method">bool SetShopAddress(Address? address, IAddressActionable addressService)</Member>
+        <Member type="Method">Address GetShopAddress(IAddressActionable addressService)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>ShoppingCart</Name>
+        <Access>Public</Access>
+        <Location left="846" top="689" />
+        <Size width="592" height="332" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly List&lt;Item&gt; _items = new()</Member>
+        <Member type="Property">public IReadOnlyList&lt;Item&gt; CartItems { get; }</Member>
+        <Member type="Property">public int CartId { get; private set; }</Member>
+        <Member type="Property">public decimal TotalPrice { get; private set; }</Member>
+        <Member type="Property">public Person? Customer { get; }</Member>
+        <Member type="Method">public decimal CalculateCartPrice()</Member>
+        <Member type="Constructor">public ShoppingCart(Person? customer)</Member>
+        <Member type="Constructor">public ShoppingCart(int cartId, Person? customer = null)</Member>
+        <Member type="Constructor">public ShoppingCart()</Member>
+        <Member type="Method">public bool AddItemToCart(Item item)</Member>
+        <Member type="Method">public bool RemoveItemFromCart(Item item)</Member>
+        <Member type="Method">public void RemoveEmptyItemsFromCart(IShoppingCartActionable service)</Member>
+        <Member type="Method">public ShoppingCart GetCart(IShoppingCartActionable service)</Member>
+        <Member type="Method">public bool CreateCart(IShoppingCartActionable service)</Member>
+        <Member type="Method">public bool TransferAnonymousCartToUser(IShoppingCartActionable service, int cartId, string userEmail)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Product</Name>
+        <Access>Public</Access>
+        <Location left="1556" top="405" />
+        <Size width="536" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Id { get; private set; }</Member>
+        <Member type="Property">public string? Name { get; }</Member>
+        <Member type="Property">public decimal Price { get; private set; }</Member>
+        <Member type="Constructor">public Product(int id, string? name, decimal price, Category? subCategory, Quantity? quantity)</Member>
+        <Member type="Constructor">public Product(string? name, decimal price, Category? subCategory, Quantity? quantity)</Member>
+        <Member type="Constructor">public Product()</Member>
+        <Member type="Method">public bool Equals(Product? other)</Member>
+        <Member type="Method">public static bool operator ==(Product? left, Product? right)</Member>
+        <Member type="Method">public static bool operator !=(Product? left, Product? right)</Member>
+        <Member type="Method">public bool CreateProduct(IProductActionable productService)</Member>
+        <Member type="Method">public bool UpdateProductPrice(IProductActionable productService, decimal price)</Member>
+        <Member type="Method">public bool UpdateProductQuantity(IProductActionable productService, int quantityValue)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Item</Name>
+        <Access>Public</Access>
+        <Location left="1608" top="798" />
+        <Size width="354" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Id { get; }</Member>
+        <Member type="Property">public int Amount { get; private set; }</Member>
+        <Member type="Constructor">public Item(InventoryProduct product, int amount = 1)</Member>
+        <Member type="Constructor">public Item(Product? product, int amount = 1)</Member>
+        <Member type="Constructor">public Item()</Member>
+        <Member type="Method">public bool AdjustAmount(int value, bool increaseAmount = false)</Member>
+        <Member type="Method">private void CalculateQuantity(int value, bool increaseAmount = false)</Member>
+        <Member type="Method">public bool Equals(Item? other)</Member>
+        <Member type="Method">public static bool operator ==(Item? left, Item? right)</Member>
+        <Member type="Method">public static bool operator !=(Item? left, Item? right)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TimeSlot</Name>
+        <Access>Public</Access>
+        <Location left="2040" top="777" />
+        <Size width="341" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public TimeOnly Start { get; }</Member>
+        <Member type="Property">public TimeOnly EndTime { get; }</Member>
+        <Member type="Constructor">public TimeSlot(TimeOnly startTime, TimeSpan slotDuration)</Member>
+        <Member type="Constructor">public TimeSlot(DateTime deliveryDate, int slotDuration)</Member>
+        <Member type="Method">public DateTime ToDateTime(DateOnly deliveryDate)</Member>
+        <Member type="Method">private static TimeOnly ToTimeOnly(DateTime deliveryDate)</Member>
+        <Member type="Method">public int GetSlotDuration()</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DeliveryHoursRange</Name>
+        <Access>Public</Access>
+        <Location left="2576" top="808" />
+        <Size width="664" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public TimeOnly Start { get; }</Member>
+        <Member type="Property">public TimeOnly End { get; }</Member>
+        <Member type="Property">public Dictionary&lt;TimeOnly, Dictionary&lt;int, TimeSlot&gt;&gt; TimeSlots { get; }</Member>
+        <Member type="Constructor">public DeliveryHoursRange(TimeOnly start, TimeOnly end, int noOfSlots)</Member>
+        <Member type="Constructor">public DeliveryHoursRange(TimeOnly start, TimeOnly end, Dictionary&lt;TimeOnly, Dictionary&lt;int, TimeSlot&gt;&gt; TimeSlot)</Member>
+        <Member type="Method">private static Dictionary&lt;TimeOnly, Dictionary&lt;int, TimeSlot&gt;&gt; SetTimeSlots(TimeOnly start, TimeOnly end, int noOfSlots)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HomeDelivery</Name>
+        <Access>Public</Access>
+        <Location left="2589" top="1415" />
+        <Size width="453" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private const int NoOfSlots = 4</Member>
+        <Member type="Property">public Person Customer { get; }</Member>
+        <Member type="Constructor">public HomeDelivery(Person customer, DateOnly deliveryDay, Address? address)</Member>
+        <Member type="Constructor">public HomeDelivery(Person customer, DateOnly deliveryDay)</Member>
+        <Member type="Method">public void SetAvailableTimeSlots(IHomeDeliveryActionable deliveryService)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PickUpDelivery</Name>
+        <Access>Public</Access>
+        <Location left="2901" top="1133" />
+        <Size width="355" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private const int NoOfSlots = 2</Member>
+        <Member type="Constructor">public PickUpDelivery(DateOnly deliveryDay, Address? address)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Address</Name>
+        <Access>Public</Access>
+        <Location left="617" top="1605" />
+        <Size width="474" height="298" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Id { get; }</Member>
+        <Member type="Property">public string Street { get; }</Member>
+        <Member type="Property">public string ZipCode { get; }</Member>
+        <Member type="Property">public string HouseNumber { get; }</Member>
+        <Member type="Property">public string City { get; }</Member>
+        <Member type="Constructor">public Address(int id, string street, string streetNumber, string zipCode, string city)</Member>
+        <Member type="Constructor">public Address(string street, string streetNumber, string zipCode, string city)</Member>
+        <Member type="Method">public bool CreatePickUpAddress(IAddressActionable addressService)</Member>
+        <Member type="Method">public bool UpdateAddress(IAddressActionable addressService)</Member>
+        <Member type="Method">public bool DeleteAddress(IAddressActionable addressService)</Member>
+        <Member type="Method">public bool Equals(Address? other)</Member>
+        <Member type="Method">public static bool operator ==(Address? left, Address? right)</Member>
+        <Member type="Method">public static bool operator !=(Address? left, Address? right)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Order</Name>
+        <Access>Public</Access>
+        <Location left="1275" top="1145" />
+        <Size width="879" height="383" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly List&lt;Item&gt; _orderItems = new()</Member>
+        <Member type="Property">public int? Id { get; }</Member>
+        <Member type="Property">public DateTime CreateDate { get; }</Member>
+        <Member type="Property">public Person? Customer { get; }</Member>
+        <Member type="Property">public decimal TotalPrice { get; }</Member>
+        <Member type="Property">public IReadOnlyList&lt;Item&gt; Items { get; }</Member>
+        <Member type="Property">public DeliveryOption DeliveryOption { get; }</Member>
+        <Member type="Property">public TimeSlot TimeSlot { get; private set; }</Member>
+        <Member type="Property">public Address DeliveryAddress { get; private set; }</Member>
+        <Member type="Constructor">public Order(int id, Person? customer, DeliveryOption deliveryOption, TimeSlot timeSlot, Address deliveryAddress, OrderStatus status, DateTime orderDate)</Member>
+        <Member type="Constructor">public Order(Person customer, DeliveryOption deliveryOption, TimeSlot timeSlot, Address deliveryAddress)</Member>
+        <Member type="Method">public bool CreateOrder(IOrderActionable orderService)</Member>
+        <Member type="Method">public void NewMethod()</Member>
+        <Member type="Method">public bool AddItem(Item item)</Member>
+        <Member type="Method">public bool UpdateStatus(OrderStatus status)</Member>
+        <Member type="Method">public bool UpdateDeliveryDay(DateOnly date)</Member>
+        <Member type="Method">public void UpdateDeliveryTimeSlot(TimeSlot timeSlot)</Member>
+        <Member type="Method">public void UpdateDeliveryAddress(Address address)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>OrderStatus</Name>
+        <Access>Public</Access>
+        <Location left="1013" top="1200" />
+        <Size width="163" height="180" />
+        <Collapsed>False</Collapsed>
+        <Value>New = 1</Value>
+        <Value>Created = 2</Value>
+        <Value>InProgress = 3</Value>
+        <Value>Processed = 4</Value>
+        <Value>ToBeDelivered = 5</Value>
+        <Value>InDelivery = 6</Value>
+        <Value>Delivered = 7</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>ShopWorker</Name>
+        <Access>Public</Access>
+        <Location left="512" top="1173" />
+        <Size width="469" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int RoleId { get; }</Member>
+        <Member type="Property">public Address? ShopAddress { get; private set; }</Member>
+        <Member type="Constructor">public ShopWorker(Address? workAddress, int? id = null)</Member>
+        <Member type="Constructor">public ShopWorker()</Member>
+        <Member type="Method">public bool SetShopAddress(Address? address, IAddressActionable addressService)</Member>
+        <Member type="Method">public Address GetShopAddress(IAddressActionable addressService)</Member>
+        <Member type="Method">public bool CreateShopWorker(IRolesActionable rolesService)</Member>
+        <Member type="Method">public bool UpdateShopAddress(IRolesActionable rolesService, Address address)</Member>
+        <Member type="Method">public static ShopWorker? Map(IRole role)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Customer</Name>
+        <Access>Public</Access>
+        <Location left="10" top="1173" />
+        <Size width="469" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int? RoleId { get; }</Member>
+        <Member type="Property">public Address? ShopAddress { get; private set; }</Member>
+        <Member type="Property">private List&lt;Address&gt; Addresses { get; }</Member>
+        <Member type="Constructor">public Customer(int? roleId = default, Address? preferredPickUpAddress = null)</Member>
+        <Member type="Constructor">public Customer()</Member>
+        <Member type="Method">public bool AddAddress(Address address)</Member>
+        <Member type="Method">private bool CheckIfAddressIsInList(Address address)</Member>
+        <Member type="Method">public bool RemoveAddress(Address address, ICustomerActionable service)</Member>
+        <Member type="Method">public bool CreateCustomer(IRolesActionable roleService)</Member>
+        <Member type="Method">public bool SetShopAddress(Address? address, IAddressActionable addressService)</Member>
+        <Member type="Method">public Address GetShopAddress(IAddressActionable addressService)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Inventory</Name>
+        <Access>Public</Access>
+        <Location left="2167" top="81" />
+        <Size width="477" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">private List&lt;InventoryProduct&gt; ProductsList { get; set; }</Member>
+        <Member type="Property">public IReadOnlyList&lt;InventoryProduct&gt; Products { get; }</Member>
+        <Member type="Constructor">public Inventory()</Member>
+        <Member type="Method">private void GetInventory(IInventoryActionable service)</Member>
+        <Member type="Method">public bool AddProduct(InventoryProduct product, IInventoryActionable service)</Member>
+        <Member type="Method">public bool RemoveProduct(InventoryProduct product, IInventoryActionable service)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>SetTimeSlots checks the minutes in the TimeSpan(start-end) to see if it is higher then the slotDuration(calculated based on noOfSlots) and afterwards checks if there are hours in the difference and adds TimeSlots for each hour in the difference.</Text>
+        <Location left="3043" top="623" />
+        <Size width="251" height="126" />
+      </Entity>
+      <Entity type="Class">
+        <Name>DeliveryOption</Name>
+        <Access>Public</Access>
+        <Location left="2490" top="1066" />
+        <Size width="355" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">protected DeliveryHoursRange HoursRange { get; set; }</Member>
+        <Member type="Property">protected DateOnly DeliveryDay { get; set; }</Member>
+        <Member type="Property">protected Address? Address { get; set; }</Member>
+        <Member type="Constructor">protected DeliveryOption(DateOnly deliveryDay, Address? address)</Member>
+        <Member type="Constructor">protected DeliveryOption(DateOnly deliveryDay)</Member>
+        <Member type="Method">protected bool SetAddress(Address? address)</Member>
+        <Member type="Method">public int GetSlotDuration()</Member>
+        <Member type="Method">protected internal void SetDeliveryDay(DateOnly deliveryDay)</Member>
+        <Member type="Method">public DateOnly GetDeliveryDay()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>QuantityUnit</Name>
+        <Access>Public</Access>
+        <Location left="1132" top="258" />
+        <Size width="163" height="180" />
+        <Collapsed>False</Collapsed>
+        <Value>Gram = 1</Value>
+        <Value>Kilogram = 2</Value>
+        <Value>Liter = 3</Value>
+        <Value>Mililiter = 4</Value>
+        <Value>Piece = 5</Value>
+        <Value>Box = 6</Value>
+        <Value>Pack = 7</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>Quantity</Name>
+        <Access>Public</Access>
+        <Location left="1113" top="510" />
+        <Size width="249" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Value { get; }</Member>
+        <Member type="Property">public QuantityUnit Unit { get; }</Member>
+        <Member type="Constructor">public Quantity(int value, QuantityUnit unit)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IEquatable&lt;T&gt;</Name>
+        <Access>Public</Access>
+        <Location left="2943" top="323" />
+        <Size width="167" height="78" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool Equals(T? other)</Member>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Interface used to check if the Product/Address is the same in both sides of the Equals. Item also implements this interface, but the Product is checked for equality.</Text>
+        <Location left="2831" top="149" />
+        <Size width="210" height="80" />
+      </Entity>
+      <Entity type="Class">
+        <Name>InventoryProduct</Name>
+        <Access>Public</Access>
+        <Location left="1556" top="65" />
+        <Size width="441" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public int Id { get; }</Member>
+        <Member type="Property">public Product? Product { get; }</Member>
+        <Member type="Property">public int AvailableAmount { get; private set; }</Member>
+        <Member type="Constructor">public InventoryProduct(Product? product, int availableAmount, int id = default)</Member>
+        <Member type="Constructor">public InventoryProduct()</Member>
+        <Member type="Method">public bool UpdateAvailableAmount(IInventoryActionable service, int amount)</Member>
+        <Member type="Method">public InventoryProduct GetItemFromInventory(IInventoryActionable service)</Member>
+        <Member type="Method">public bool IsItemInStock(IInventoryActionable service)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>All set methods on properties are private. </Text>
+        <Location left="936" top="65" />
+        <Size width="233" height="50" />
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="6" second="5">
+        <Label>has</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1680</X>
+          <Y>734</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="4" second="6">
+        <Label>contains</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1496</X>
+          <Y>821</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1557</X>
+          <Y>848</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>1..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="5" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..1</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>314</X>
+          <Y>443</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..1</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="12" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>732</X>
+          <Y>1148</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>391</X>
+          <Y>1039</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="2" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>121</X>
+          <Y>809</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>121</X>
+          <Y>853</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Comment" first="17" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="8" second="7">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2551</X>
+          <Y>851</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2433</X>
+          <Y>851</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="9" second="18">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>2511</X>
+          <Y>1321</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="10" second="18">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="18" second="11">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2553</X>
+          <Y>1345</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2228</X>
+          <Y>1688</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1998</X>
+          <Y>1081</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2118</X>
+          <Y>1039</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="18">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2186</X>
+          <Y>1203</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="18" second="8">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="20" second="19">
+        <Label>measured in</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="15" second="11">
+        <Label>list of</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>501</X>
+          <Y>1413</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>694</X>
+          <Y>1566</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Comment" first="22" second="21">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>2996</X>
+          <Y>298</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="5" second="21">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2146</X>
+          <Y>390</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2391</X>
+          <Y>378</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="6" second="21">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1993</X>
+          <Y>722</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>3026</X>
+          <Y>756</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="23" second="5">
+        <Label>has</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1755</X>
+          <Y>303</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1755</X>
+          <Y>380</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="16" second="23">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="5" second="20">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="21">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>3340</X>
+          <Y>1747</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>3148</X>
+          <Y>347</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="12" second="2">
+        <Label>belongs to</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1272</X>
+          <Y>1075</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>577</X>
+          <Y>829</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="4" second="2">
+        <Label>belongs</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..1</EndMultiplicity>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>BLL-Services And Related Interfaces</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>IAddressActionable</Name>
+        <Access>Public</Access>
+        <Location left="19" top="54" />
+        <Size width="301" height="163" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool CreatePickUpAddress(Address address)</Member>
+        <Member type="Method">bool UpdateAddress(Address address)</Member>
+        <Member type="Method">bool DeleteAddress(Address address)</Member>
+        <Member type="Method">List&lt;Address&gt; GetPickUpAddresses()</Member>
+        <Member type="Method">bool SetShopAddress(IRole role, Address? address)</Member>
+        <Member type="Method">Address GetShopAddress(IRole role)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ICategoryActionable</Name>
+        <Access>Public</Access>
+        <Location left="1595" top="54" />
+        <Size width="353" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool CreateCategory(Category category, bool isSubCategory = false)</Member>
+        <Member type="Method">bool UpdateCategoryName(Category category)</Member>
+        <Member type="Method">bool DeleteCategory(Category category)</Member>
+        <Member type="Method">List&lt;Category&gt; GetCategories()</Member>
+        <Member type="Method">Category GetCategory(Category category)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ICredentialsActionable</Name>
+        <Access>Public</Access>
+        <Location left="19" top="566" />
+        <Size width="383" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Credentials ReadCredentials(string email)</Member>
+        <Member type="Method">void NewMethod()</Member>
+        <Member type="Method">bool Create(Credentials credentials)</Member>
+        <Member type="Method">bool UpdatePassword(Credentials credentials, string newPassword)</Member>
+        <Member type="Method">bool CheckEmailDuplicate(string email)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ICustomerActionable</Name>
+        <Access>Public</Access>
+        <Location left="1235" top="580" />
+        <Size width="483" height="95" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool AddHomeDeliveryAddress(Customer customer, Address address)</Member>
+        <Member type="Method">bool RemoveHomeDeliveryAddressFromCustomer(Customer customer, Address address)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IHomeDeliveryActionable</Name>
+        <Access>Public</Access>
+        <Location left="450" top="580" />
+        <Size width="372" height="78" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">int CountOrdersByTimeSlot(TimeSlot slot, DateOnly deliveryDay)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IInventoryActionable</Name>
+        <Access>Public</Access>
+        <Location left="1990" top="54" />
+        <Size width="364" height="163" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool AddItemToInventory(InventoryProduct item)</Member>
+        <Member type="Method">bool RemoveItemFromInventory(InventoryProduct item)</Member>
+        <Member type="Method">bool UpdateItemQuantityInInventory(InventoryProduct item)</Member>
+        <Member type="Method">InventoryProduct GetItemFromInventory(InventoryProduct item)</Member>
+        <Member type="Method">List&lt;InventoryProduct&gt; GetInventory()</Member>
+        <Member type="Method">bool IsItemInStock(Product product)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IOrderActionable</Name>
+        <Access>Public</Access>
+        <Location left="361" top="54" />
+        <Size width="397" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool CreateOrder(Order order)</Member>
+        <Member type="Method">bool UpdateOrder(Order order)</Member>
+        <Member type="Method">List&lt;Order&gt; GetAll(DateTime? date = null, DeliveryOption? deliveryOption = null)</Member>
+        <Member type="Method">List&lt;Order&gt; GetAllOrdersByCustomer(Person customer)</Member>
+        <Member type="Method">Order GetOrder(Order order)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IPersonActionable</Name>
+        <Access>Public</Access>
+        <Location left="2388" top="54" />
+        <Size width="270" height="163" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Person GetPerson()</Member>
+        <Member type="Method">List&lt;Person&gt; GetPersons()</Member>
+        <Member type="Method">bool CreatePerson(Person person)</Member>
+        <Member type="Method">bool UpdatePerson(Person person)</Member>
+        <Member type="Method">bool DeletePerson(Person person)</Member>
+        <Member type="Method">bool IsPersonAlreadyRegistered(string email)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IProductActionable</Name>
+        <Access>Public</Access>
+        <Location left="801" top="54" />
+        <Size width="757" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">int CreateProduct(Product product)</Member>
+        <Member type="Method">bool UpdateProductPrice(Product product, decimal newPrice)</Member>
+        <Member type="Method">bool UpdateProductQuantity(Product product, int newQuantityValue)</Member>
+        <Member type="Method">List&lt;Product&gt; GetAllProducts()</Member>
+        <Member type="Method">List&lt;Product&gt; FilterProducts(string? categoryName = null, string? subcategoryName = null, decimal minPrice = 0, decimal maxPrice = 0, bool getMostExpensive = true)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IRolesActionable</Name>
+        <Access>Public</Access>
+        <Location left="892" top="580" />
+        <Size width="316" height="95" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool CreateRole(IRole role)</Member>
+        <Member type="Method">bool UpdateShopAddress(IRole role, Address address)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IShoppingCartActionable</Name>
+        <Access>Public</Access>
+        <Location left="1748" top="548" />
+        <Size width="371" height="180" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">ShoppingCart GetCart(ShoppingCart cart)</Member>
+        <Member type="Method">bool TransferAnonymousCartToUser(int cartId, string userEmail)</Member>
+        <Member type="Method">int CreateCart(ShoppingCart cart)</Member>
+        <Member type="Method">bool AddItemToCart(ShoppingCart cart, Item item)</Member>
+        <Member type="Method">bool RemoveItemFromCart(ShoppingCart cart, Item item)</Member>
+        <Member type="Method">bool EmptyCart(ShoppingCart cart)</Member>
+        <Member type="Method">bool RemoveEmptyItemsFromCart(ShoppingCart cart)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>AddressService</Name>
+        <Access>Public</Access>
+        <Location left="19" top="319" />
+        <Size width="312" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IAddressActionable _addressRepository</Member>
+        <Member type="Constructor">public AddressService(IAddressActionable addressRepository)</Member>
+        <Member type="Method">public bool CreatePickUpAddress(Address address)</Member>
+        <Member type="Method">public bool UpdateAddress(Address address)</Member>
+        <Member type="Method">public bool DeleteAddress(Address address)</Member>
+        <Member type="Method">public List&lt;Address&gt; GetPickUpAddresses()</Member>
+        <Member type="Method">public bool SetShopAddress(IRole role, Address? address)</Member>
+        <Member type="Method">public Address GetShopAddress(IRole role)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OrderService</Name>
+        <Access>Public</Access>
+        <Location left="361" top="307" />
+        <Size width="393" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IOrderActionable _orderRepository</Member>
+        <Member type="Constructor">public OrderService(IOrderActionable orderRepository)</Member>
+        <Member type="Method">public bool CreateOrder(Order order)</Member>
+        <Member type="Method">public bool UpdateOrder(Order order)</Member>
+        <Member type="Method">public List&lt;Order&gt; GetAll(DateTime? date = null, DeliveryOption? deliveryOption = null)</Member>
+        <Member type="Method">public List&lt;Order&gt; GetAllOrdersByCustomer(Person customer)</Member>
+        <Member type="Method">public Order GetOrder(Order order)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ProductService</Name>
+        <Access>Public</Access>
+        <Location left="801" top="294" />
+        <Size width="745" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IProductActionable _productRepository</Member>
+        <Member type="Constructor">public ProductService(IProductActionable productRepository)</Member>
+        <Member type="Method">public int CreateProduct(Product product)</Member>
+        <Member type="Method">public bool UpdateProductPrice(Product product, decimal newPrice)</Member>
+        <Member type="Method">public bool UpdateProductQuantity(Product product, int newQuantityValue)</Member>
+        <Member type="Method">public List&lt;Product&gt; GetAllProducts()</Member>
+        <Member type="Method">public List&lt;Product&gt; FilterProducts(string? categoryName = null, string? subcategoryName = null, decimal minPrice = 0, decimal maxPrice = 0, bool getMostExpensive = true)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CategoryService</Name>
+        <Access>Public</Access>
+        <Location left="1595" top="294" />
+        <Size width="347" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly ICategoryActionable _categoryRepository</Member>
+        <Member type="Constructor">public CategoryService(ICategoryActionable categoryRepository)</Member>
+        <Member type="Method">public bool CreateCategory(Category category, bool isSubCategory = false)</Member>
+        <Member type="Method">public bool UpdateCategoryName(Category category)</Member>
+        <Member type="Method">public bool DeleteCategory(Category category)</Member>
+        <Member type="Method">public List&lt;Category&gt; GetCategories()</Member>
+        <Member type="Method">public Category GetCategory(Category category)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>InventoryService</Name>
+        <Access>Public</Access>
+        <Location left="1990" top="294" />
+        <Size width="362" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IInventoryActionable _inventoryRepository</Member>
+        <Member type="Constructor">public InventoryService(IInventoryActionable inventoryRepository)</Member>
+        <Member type="Method">public bool AddItemToInventory(InventoryProduct item)</Member>
+        <Member type="Method">public bool RemoveItemFromInventory(InventoryProduct item)</Member>
+        <Member type="Method">public bool UpdateItemQuantityInInventory(InventoryProduct item)</Member>
+        <Member type="Method">public InventoryProduct GetItemFromInventory(InventoryProduct item)</Member>
+        <Member type="Method">public List&lt;InventoryProduct&gt; GetInventory()</Member>
+        <Member type="Method">public bool IsItemInStock(Product product)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PersonService</Name>
+        <Access>Public</Access>
+        <Location left="2388" top="294" />
+        <Size width="294" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IPersonActionable _personRepository</Member>
+        <Member type="Constructor">public PersonService(IPersonActionable personRepository)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CredentialsService</Name>
+        <Access>Public</Access>
+        <Location left="19" top="791" />
+        <Size width="375" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly ICredentialsActionable _credentialsRepository</Member>
+        <Member type="Constructor">public CredentialsService(ICredentialsActionable credentialsRepository)</Member>
+        <Member type="Method">public Credentials ReadCredentials(string email)</Member>
+        <Member type="Method">public void NewMethod()</Member>
+        <Member type="Method">public bool Create(Credentials credentials)</Member>
+        <Member type="Method">public bool UpdatePassword(Credentials credentials, string newPassword)</Member>
+        <Member type="Method">public bool CheckEmailDuplicate(string email)</Member>
+        <Modifier>Sealed</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HomeDeliveryService</Name>
+        <Access>Public</Access>
+        <Location left="437" top="791" />
+        <Size width="408" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IHomeDeliveryActionable _homeDeliveryRepository</Member>
+        <Member type="Constructor">public HomeDeliveryService(IHomeDeliveryActionable homeDeliveryRepository)</Member>
+        <Member type="Method">public int CountOrdersByTimeSlot(TimeSlot slot, DateOnly deliveryDay)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RolesService</Name>
+        <Access>Public</Access>
+        <Location left="1029" top="761" />
+        <Size width="487" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly ICustomerActionable _customerRepository</Member>
+        <Member type="Field">private readonly IRolesActionable _rolesRepository</Member>
+        <Member type="Constructor">public RolesService(IRolesActionable rolesRepository, ICustomerActionable customerRepository)</Member>
+        <Member type="Method">public bool CreateRole(IRole role)</Member>
+        <Member type="Method">public bool UpdateShopAddress(IRole role, Address address)</Member>
+        <Member type="Method">public bool AddHomeDeliveryAddress(Customer customer, Address address)</Member>
+        <Member type="Method">public bool RemoveHomeDeliveryAddressFromCustomer(Customer customer, Address address)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ShoppingCartService</Name>
+        <Access>Public</Access>
+        <Location left="1702" top="824" />
+        <Size width="395" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private readonly IShoppingCartActionable _shoppingCartRepository</Member>
+        <Member type="Constructor">public ShoppingCartService(IShoppingCartActionable shoppingCartRepository)</Member>
+        <Member type="Method">public ShoppingCart GetCart(ShoppingCart cart)</Member>
+        <Member type="Method">public bool TransferAnonymousCartToUser(int cartId, string userEmail)</Member>
+        <Member type="Method">public int CreateCart(ShoppingCart cart)</Member>
+        <Member type="Method">public bool AddItemToCart(ShoppingCart cart, Item item)</Member>
+        <Member type="Method">public bool RemoveItemFromCart(ShoppingCart cart, Item item)</Member>
+        <Member type="Method">public bool EmptyCart(ShoppingCart cart)</Member>
+        <Member type="Method">public bool RemoveEmptyItemsFromCart(ShoppingCart cart)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IValidatable</Name>
+        <Access>Public</Access>
+        <Location left="2195" top="548" />
+        <Size width="458" height="112" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">bool PhoneNumberValidator(string phoneNumber, string regionCode)</Member>
+        <Member type="Method">bool ValidateEmail(string email)</Member>
+        <Member type="Method">bool CheckEmailDuplicate(ICredentialsActionable credentialsService, string email)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>Validator</Name>
+        <Access>Public</Access>
+        <Location left="2195" top="762" />
+        <Size width="454" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public bool PhoneNumberValidator(string phoneNumber, string regionCode)</Member>
+        <Member type="Method">public bool ValidateEmail(string email)</Member>
+        <Member type="Method">public bool CheckEmailDuplicate(ICredentialsActionable credentialsService, string email)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PhoneValidation</Name>
+        <Access>Public</Access>
+        <Location left="2292" top="941" />
+        <Size width="318" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">private static int GetCountryDigits(string countryName)</Member>
+        <Member type="Method">public static string GetExtension(string phone, string defaultRegion)</Member>
+        <Member type="Method">public static Dictionary&lt;string, string&gt; GetNamesAndCode()</Member>
+        <Member type="Method">public static bool CheckPhone(string phoneNo, string region)</Member>
+        <Member type="Method">public static string International(string phoneNo, string region)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="11" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="12" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="13" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="16" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="17" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="18" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="20" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1855</X>
+          <Y>753</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="21">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

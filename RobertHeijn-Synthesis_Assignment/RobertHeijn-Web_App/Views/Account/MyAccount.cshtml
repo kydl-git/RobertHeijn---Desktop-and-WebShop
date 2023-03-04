@@ -1,0 +1,53 @@
+﻿@model RobertHeijn_Web_App.Models.Account.AccountViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+    ViewData.AddActivePage(NavBarPages.Edit);
+}
+
+<h4>@ViewData["Title"]</h4>
+@await Html.PartialAsync("_StatusMessage", Model.StatusMessage)
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="~/images/user-avatar.png" alt="avatar" class="rounded-circle img-fluid"/>
+                <h5 class="my-3">@Model.FirstName</h5>
+                <p class="text-muted mb-1">@Model.Role</p>
+            </div>
+        </div>
+    </div> 
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.FirstName @Model.LastName</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.Email</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.Phone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
